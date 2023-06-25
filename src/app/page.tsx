@@ -29,7 +29,7 @@ export default async function Home() {
           href={'/linhas'}
           className="flex items-center justify-between gap-2 rounded-md bg-zinc-50 px-4 py-3"
         >
-          Buscar linhas
+          <span className="font-bold text-zinc-950">Buscar linhas</span>
           <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
