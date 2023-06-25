@@ -42,7 +42,7 @@ export default async function Linhas() {
     })
 
   return (
-    <main className="flex flex-col gap-4 p-8">
+    <main className="flex h-full w-full flex-col gap-4 p-8">
       <header>
         <h1 className="text-lg font-semibold text-zinc-950">
           Para onde deseja ir
