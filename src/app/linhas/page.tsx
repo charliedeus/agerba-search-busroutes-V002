@@ -19,8 +19,6 @@ export default async function Linhas() {
   )
     .then((response) => response.json())
     .then((data) => {
-      console.log(data)
-
       const formattedCities = data.cities.map(
         (city: {
           id: string
@@ -45,7 +43,7 @@ export default async function Linhas() {
     <main className="flex h-full w-full flex-col gap-4 p-8">
       <header>
         <h1 className="text-lg font-semibold text-zinc-950">
-          Para onde deseja ir
+          Municípios atendidos:
         </h1>
       </header>
 
