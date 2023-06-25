@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'hero-pattern': "url('./src/assets/bg-02.jpg')",
+      },
       screens: {
         tablet: '640px',
         laptop: '1024px',

@@ -1,11 +1,12 @@
 export default async function Linhas() {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/info`)
+  // const { cities } = await fetch(
+  //   `${process.env.NEXT_PUBLIC_API_BASE_URL}/info`,
+  //   {
+  //     next: {
+  //       revalidate: 60 * 60, // 1 hour
+  //     },
+  //   },
+  // ).then((response) => response.json())
 
-  return (
-    <main>
-      <h1>Linhas</h1>
-
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-    </main>
-  )
+  return <main>Linhas</main>
 }
