@@ -1,4 +1,5 @@
 import { MostAttendedCities } from '@/components/MostAttendedCities'
+import SearchBusRouteForm from '@/components/SearchBusRouteForm'
 
 interface CityProps {
   id: string
@@ -48,6 +49,8 @@ export default async function Linhas() {
       </header>
 
       <MostAttendedCities cities={cities} />
+
+      <SearchBusRouteForm />
     </main>
   )
 }

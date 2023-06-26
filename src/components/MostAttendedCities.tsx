@@ -40,7 +40,7 @@ export function MostAttendedCities({ cities }: MostAttendedCitiesProps) {
         {cities.map((city) => (
           <div
             key={city.id}
-            className="keen-slider__slide relative flex h-44 max-h-44 w-full min-w-[137.33px] flex-1 rounded-lg bg-blue-500 shadow-lg"
+            className="keen-slider__slide relative flex h-44 max-h-44 w-full min-w-[137.33px] flex-1 justify-end rounded-lg bg-blue-500 shadow-lg"
           >
             <Image
               src={
@@ -52,11 +52,8 @@ export function MostAttendedCities({ cities }: MostAttendedCitiesProps) {
               height={100}
               className="h-full w-full flex-1 rounded-md object-cover object-center"
             />
-            <div className="absolute p-6">
-              <h1
-                className="text-lg font-semibold text-zinc-50"
-                style={{ textShadow: '0 1px 3px rgb(0, 0, 0, 0.8)' }}
-              >
+            <div className="w-full-300 absolute p-6">
+              <h1 className="rounded-full bg-zinc-50 px-3 py-1 text-sm font-semibold text-zinc-900">
                 {city.name}
               </h1>
             </div>

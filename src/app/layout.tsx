@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body
-        className={`${inter.className} font-inter flex h-screen max-h-screen flex-col bg-zinc-100`}
+        className={`${inter.className} font-inter flex h-screen max-h-screen flex-col bg-zinc-200`}
       >
         {children}
       </body>
