@@ -6,16 +6,19 @@ import Link from 'next/link'
 
 export default async function Home() {
   return (
-    <main className="relative inset-0 flex h-full w-full">
-      <Image
-        src={'/bg-02.jpg'}
-        alt=""
-        width={390}
-        height={844}
-        className="flex object-cover object-center"
-      />
+    <main className="relative inset-0 flex h-screen w-full">
+      <div className="relative flex h-full w-full">
+        <Image
+          src={'/bg-02.jpg'}
+          alt=""
+          width={390}
+          height={844}
+          className="h-full w-full object-cover object-center"
+        />
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-transparent to-black" />
+      </div>
 
-      <div className="absolute inset-0 mt-auto flex h-1/2 flex-col justify-between gap-4 p-8">
+      <div className="absolute inset-0 z-20 mt-auto flex h-1/2 flex-col justify-between gap-4 p-8">
         <Image src={logoImg} alt="" width={120} />
 
         <p className="text-base text-zinc-100">
@@ -29,7 +32,7 @@ export default async function Home() {
           href={'/linhas'}
           className="flex items-center justify-between gap-2 rounded-md bg-zinc-50 px-4 py-3"
         >
-          <span className="font-bold text-zinc-950">Buscar linhas</span>
+          <span className="font-bold text-zinc-950">Consultar</span>
           <ArrowRight className="h-4 w-4" />
         </Link>
       </div>

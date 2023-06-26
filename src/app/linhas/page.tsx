@@ -1,5 +1,6 @@
-import { MostAttendedCities } from '@/components/MostAttendedCities'
-import SearchBusRouteForm from '@/components/SearchBusRouteForm'
+import { SearchBusRouteForm } from '@/components/SearchBusRouteForm'
+import { Home } from 'lucide-react'
+import Link from 'next/link'
 
 interface CityProps {
   id: string
@@ -42,15 +43,17 @@ export default async function Linhas() {
 
   return (
     <main className="flex h-full w-full flex-col gap-4 p-8">
-      <header>
+      <header className="flex items-center justify-between">
         <h1 className="text-lg font-semibold text-zinc-950">
           Municípios atendidos:
         </h1>
+
+        <Link href={'/'} className="rounded-full bg-zinc-50 p-4">
+          <Home className="h-4 w-4" />
+        </Link>
       </header>
 
-      <MostAttendedCities cities={cities} />
-
-      <SearchBusRouteForm />
+      <SearchBusRouteForm cities={cities} />
     </main>
   )
 }

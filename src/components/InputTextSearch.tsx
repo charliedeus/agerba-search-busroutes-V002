@@ -14,9 +14,10 @@ import unidecode from 'unidecode'
 
 interface CityProps {
   id: string
-  ibge_code: number
   name: string
-  cover_url: string | null
+  coverUrl?: string
+  countOriginViews: number
+  countDestinyViews: number
 }
 
 interface SearchFormProps {
@@ -79,15 +80,15 @@ export const InputTextSearch = forwardRef<SearchFormRef, SearchFormProps>(
 
     return (
       <Combobox value={selectedCity} onChange={handleSelectCity}>
-        <div className="w-full bg-transparent">
+        <div className="w-full">
           <label>
             <span className="text-xs font-semibold text-zinc-400">{label}</span>
             <Combobox.Input
               placeholder={placeholder}
-              // onChange={debounceChangeHandler}
+              onChange={debounceChangeHandler}
               onKeyDown={handleEscapeKey}
               displayValue={(city: CityProps) => city?.name}
-              className="w-full bg-transparent py-2 outline-none"
+              className="w-full bg-zinc-100 py-2 outline-none"
             />
           </label>
 
@@ -100,7 +101,7 @@ export const InputTextSearch = forwardRef<SearchFormRef, SearchFormProps>(
               leaveFrom="transform scale-100 opacity-100"
               leaveTo="transform scale-95 opacity-0"
               className={
-                'absolute top-16 w-full rounded-md bg-white p-2 shadow-lg'
+                'absolute top-16 z-50 w-full rounded-md bg-white p-2 shadow-lg'
               }
             >
               <Combobox.Options>

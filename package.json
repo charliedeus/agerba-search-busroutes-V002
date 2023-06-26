@@ -14,11 +14,13 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.15",
+    "@hookform/resolvers": "^3.1.1",
     "@prisma/client": "^4.16.0",
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
     "autoprefixer": "10.4.14",
     "csvtojson": "^2.0.10",
+    "dayjs": "^1.11.8",
     "eslint": "8.43.0",
     "eslint-config-next": "^13.4.6",
     "keen-slider": "^6.8.5",
@@ -28,8 +30,10 @@
     "postcss": "8.4.24",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.0",
     "tailwindcss": "3.3.2",
     "unidecode": "^0.1.8",
+    "zod": "^3.21.4",
     "zustand": "^4.3.8"
   },
   "devDependencies": {
@@ -39,6 +43,7 @@
     "@types/unidecode": "^0.1.1",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "prisma": "^4.16.0",
+    "tailwind-scrollbar": "^3.0.4",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.3"
   }
