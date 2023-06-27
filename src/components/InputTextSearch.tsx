@@ -84,6 +84,7 @@ export const InputTextSearch = forwardRef<SearchFormRef, SearchFormProps>(
           <label>
             <span className="text-xs font-semibold text-zinc-400">{label}</span>
             <Combobox.Input
+              autoComplete="off"
               placeholder={placeholder}
               onChange={debounceChangeHandler}
               onKeyDown={handleEscapeKey}

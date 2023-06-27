@@ -42,7 +42,7 @@ export default async function Linhas() {
     })
 
   return (
-    <main className="flex h-full w-full flex-col gap-4 p-8">
+    <main className="flex h-full w-full flex-col gap-4 px-8 py-4">
       <header className="flex items-center justify-between">
         <h1 className="text-lg font-semibold text-zinc-950">
           Municípios atendidos:

@@ -90,7 +90,7 @@ export const SearchBusRouteForm = forwardRef<
     >
       {busRoutes.length === 0 && <MostAttendedCities cities={cities} />}
 
-      <div className="relative flex w-full flex-none flex-col items-center justify-center gap-1 rounded-lg bg-zinc-100 px-2 py-4">
+      <div className="relative flex w-full flex-none flex-col items-center justify-center gap-1 rounded-lg bg-zinc-100 p-2">
         <InputTextSearch
           label="Origem"
           cities={cities}
@@ -123,7 +123,7 @@ export const SearchBusRouteForm = forwardRef<
                 <li
                   key={item.id}
                   onClick={() => handleSelectedBusRoute(item)}
-                  className="flex items-center gap-2 text-sm"
+                  className="flex cursor-pointer items-center gap-2 pr-4 text-sm hover:bg-gray-300"
                 >
                   <span className="w-6 self-start text-zinc-400">
                     {index + 1}
@@ -137,7 +137,7 @@ export const SearchBusRouteForm = forwardRef<
       )}
 
       <div className="mt-auto flex flex-none items-center gap-1">
-        <button className="flex flex-1 items-center justify-between gap-2 rounded-md bg-green-700 px-4 py-3 font-semibold text-zinc-50 hover:bg-green-800 focus:bg-green-800">
+        <button className="flex flex-1 items-center justify-between gap-2 rounded-md bg-blue-900 px-4 py-3 font-semibold text-zinc-50 hover:bg-blue-900 focus:bg-blue-900/90">
           Buscar
           <Search className="h-4 w-4" />
         </button>
@@ -168,7 +168,12 @@ export const SearchBusRouteForm = forwardRef<
         >
           <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
-          {selectedBusRoute && <Modal busRoute={selectedBusRoute} />}
+          {selectedBusRoute && (
+            <Modal
+              busRoute={selectedBusRoute}
+              closeModal={() => setModalIsOpen(false)}
+            />
+          )}
         </Dialog>
       </Transition>
     </form>

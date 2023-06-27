@@ -16,6 +16,22 @@ export interface BusRouteProps {
   cover_url: string
   starts_in: CityProps
   ends_in: CityProps
+  itinerary: Array<{
+    place_itinerary: Array<{
+      section_number: number
+      is_access: boolean
+      place: {
+        name: string
+      }
+    }>
+  }>
+  timetable: Array<{
+    id: string
+    direction: string
+    weekday: string
+    starts_at: string
+    bus_route_id: string
+  }>
 }
 
 export interface BusRoutesState {
