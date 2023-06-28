@@ -90,27 +90,28 @@ export const SearchBusRouteForm = forwardRef<
     >
       {busRoutes.length === 0 && <MostAttendedCities cities={cities} />}
 
-      <div className="relative flex w-full flex-none flex-col items-center justify-center gap-1 rounded-lg bg-zinc-100 p-2">
+      <div className="relative flex w-full flex-none flex-col items-center justify-center gap-1 rounded-lg bg-zinc-100 p-2 laptop:mx-auto laptop:w-2/3 laptop:flex-row laptop:gap-4">
         <InputTextSearch
           label="Origem"
           cities={cities}
           onSelectCity={handleSelectOriginCity}
           {...register('originCityId')}
         />
+
+        <button className="absolute right-3 z-30 rounded-full bg-zinc-50 p-4 shadow focus:outline-none laptop:relative laptop:rotate-90">
+          <ArrowDownUp className="h-6 w-6" />
+        </button>
+
         <InputTextSearch
           label="Destino"
           cities={cities}
           onSelectCity={handleSelectDestinyCity}
           {...register('destinyCityId')}
         />
-
-        <button className="absolute right-3 z-30 rounded-full bg-zinc-50 p-4 focus:outline-none">
-          <ArrowDownUp className="h-6 w-6" />
-        </button>
       </div>
 
       {busRoutes.length > 0 && (
-        <div className="flex grow flex-col gap-4 rounded-lg bg-zinc-100 px-2 py-4 shadow">
+        <div className="flex grow flex-col gap-4 rounded-lg bg-zinc-100 px-2 py-4 shadow laptop:mx-auto laptop:w-2/3">
           <h1 className="text-base font-semibold">
             Resultado:{' '}
             {busRoutes.length === 1
@@ -123,7 +124,7 @@ export const SearchBusRouteForm = forwardRef<
                 <li
                   key={item.id}
                   onClick={() => handleSelectedBusRoute(item)}
-                  className="flex cursor-pointer items-center gap-2 pr-4 text-sm hover:bg-gray-300"
+                  className="flex cursor-pointer items-center gap-2 pr-4 text-sm hover:font-semibold"
                 >
                   <span className="w-6 self-start text-zinc-400">
                     {index + 1}
@@ -136,8 +137,8 @@ export const SearchBusRouteForm = forwardRef<
         </div>
       )}
 
-      <div className="mt-auto flex flex-none items-center gap-1">
-        <button className="flex flex-1 items-center justify-between gap-2 rounded-md bg-blue-900 px-4 py-3 font-semibold text-zinc-50 hover:bg-blue-900 focus:bg-blue-900/90">
+      <div className="mt-auto flex flex-none items-center gap-1 laptop:mx-auto laptop:w-2/3">
+        <button className="flex flex-1 items-center justify-between gap-2 rounded-md bg-blue-900 px-4 py-3 font-semibold text-zinc-50 hover:bg-blue-950 focus:bg-blue-950">
           Buscar
           <Search className="h-4 w-4" />
         </button>

@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 export default async function Home() {
   return (
-    <main className="relative inset-0 flex h-screen w-full laptop:mx-auto laptop:max-w-[1280px]">
+    <main className="relative inset-0 flex h-screen w-full">
       <div className="relative flex h-full w-full">
         <Image
           src={'/bg-02.jpg'}
@@ -18,8 +18,8 @@ export default async function Home() {
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-transparent to-black" />
       </div>
 
-      <div className="absolute inset-0 z-20 mt-auto flex h-1/2 flex-col justify-between gap-4 p-8 laptop:w-2/3 laptop:justify-normal laptop:gap-8">
-        <Image src={logoImg} alt="" className="w-32 laptop:w-64" />
+      <div className="absolute inset-0 z-20 mt-auto flex h-1/2 flex-col justify-between gap-4 p-8 laptop:w-3/4 laptop:justify-normal laptop:gap-12">
+        <Image src={logoImg} alt="" className="w-32 laptop:w-56" />
 
         <p className="text-base text-zinc-100 laptop:text-xl">
           Planeje suas viagens com facilidade! Nosso aplicativo permite que você
