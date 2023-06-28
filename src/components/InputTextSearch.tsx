@@ -60,7 +60,7 @@ export const InputTextSearch = forwardRef<SearchFormRef, SearchFormProps>(
     }
 
     const debounceChangeHandler = useMemo(() => {
-      return debounce(changeHandler, 300)
+      return debounce(changeHandler, 0)
     }, [])
 
     async function handleSelectCity(city: CityProps) {

@@ -98,9 +98,12 @@ export const SearchBusRouteForm = forwardRef<
           {...register('originCityId')}
         />
 
-        <button className="absolute right-3 z-30 rounded-full bg-zinc-50 p-4 shadow focus:outline-none laptop:relative laptop:rotate-90">
-          <ArrowDownUp className="h-6 w-6" />
-        </button>
+        {/* <button
+          type="button"
+          className="absolute z-30 p-4 rounded-full shadow right-3 bg-zinc-50 focus:outline-none laptop:relative laptop:rotate-90"
+        >
+          <ArrowDownUp className="w-6 h-6" />
+        </button> */}
 
         <InputTextSearch
           label="Destino"
