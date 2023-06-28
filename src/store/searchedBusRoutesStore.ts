@@ -3,9 +3,9 @@ import { create } from 'zustand'
 interface CityProps {
   id: string
   name: string
-  coverUrl?: string
-  countOriginViews: number
-  countDestinyViews: number
+  cover_url?: string
+  count_origin_views: number
+  count_destiny_views: number
 }
 
 export interface BusRouteProps {

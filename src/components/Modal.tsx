@@ -36,6 +36,8 @@ export default function Modal({ busRoute, closeModal }: ModalProps) {
     initial: 0,
   })
 
+  console.log(busRoute.ends_in)
+
   function orderedByTimesTable(schedules: TimesTableProps[]): {
     ida: TimesTableProps[]
     volta: TimesTableProps[]
@@ -86,13 +88,13 @@ export default function Modal({ busRoute, closeModal }: ModalProps) {
           <div className="relative flex max-h-60 w-full flex-1 overflow-hidden rounded-md shadow-md">
             <Image
               src={
-                busRoute.cover_url ||
+                busRoute.ends_in.cover_url ||
                 'https://images.unsplash.com/photo-1622522867204-35b68cb3d200?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80'
               }
               width={390}
               height={585}
               alt=""
-              className="flex-1 object-cover object-center blur-sm"
+              className="flex-1 object-cover object-center"
             />
 
             <button
