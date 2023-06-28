@@ -36,8 +36,6 @@ export default function Modal({ busRoute, closeModal }: ModalProps) {
     initial: 0,
   })
 
-  console.log(busRoute.ends_in)
-
   function orderedByTimesTable(schedules: TimesTableProps[]): {
     ida: TimesTableProps[]
     volta: TimesTableProps[]
