@@ -5,7 +5,6 @@ import { Readable, Transform } from 'node:stream'
 import { createReadStream } from 'fs'
 import csvtojson from 'csvtojson'
 import { WritableStream, TransformStream } from 'node:stream/web'
-import unidecode from 'unidecode'
 
 // interface CityProps {
 //   id: string
@@ -17,7 +16,7 @@ import unidecode from 'unidecode'
 // }
 
 export async function POST(request: NextRequest) {
-  const cities = await prisma.city.findMany()
+  // const cities = await prisma.city.findMany()
 
   const data = await request.formData()
   const file: File | null = data.get('file') as unknown as File
@@ -52,25 +51,25 @@ export async function POST(request: NextRequest) {
             nupermissionarios: Number(data.nupermissionarios) || null,
           }
 
-          const originCity = cities.find((city) =>
-            String(unidecode(city.name.toLowerCase())).includes(
-              unidecode(mappedData.deorigem.toLowerCase()),
-            ),
-          )
+          // const originCity = cities.find((city) =>
+          //   String(unidecode(city.name.toLowerCase())).includes(
+          //     unidecode(mappedData.deorigem.toLowerCase()),
+          //   ),
+          // )
 
-          if (!originCity) {
-            return
-          }
+          // if (!originCity) {
+          //   return
+          // }
 
-          const destinyCity = cities.find((city) =>
-            String(unidecode(city.name.toLowerCase())).includes(
-              unidecode(mappedData.dedestino.toLowerCase()),
-            ),
-          )
+          // const destinyCity = cities.find((city) =>
+          //   String(unidecode(city.name.toLowerCase())).includes(
+          //     unidecode(mappedData.dedestino.toLowerCase()),
+          //   ),
+          // )
 
-          if (!destinyCity) {
-            return
-          }
+          // if (!destinyCity) {
+          //   return
+          // }
 
           const busRoute = {
             bus_route_number: mappedData.nulinha,
@@ -80,8 +79,8 @@ export async function POST(request: NextRequest) {
             count_permit_holders: Number(mappedData.nupermissionarios) || null,
             previous_id: Number(mappedData.cdlinha),
             previous_parent_key: Number(mappedData.cdlinhapai) || null,
-            starts_in_id: originCity.id,
-            ends_in_id: destinyCity.id,
+            // starts_in_id: originCity.id,
+            // ends_in_id: destinyCity.id,
           }
 
           await prisma.busRoute.create({

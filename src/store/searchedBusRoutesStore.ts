@@ -1,30 +1,17 @@
 import { create } from 'zustand'
 
-interface CityProps {
+interface PlaceProps {
   id: string
   name: string
-  cover_url?: string
-  count_origin_views: number
-  count_destiny_views: number
 }
 
 export interface BusRouteProps {
   id: string
-  bus_route_number: string
+  busRouteNumber: string
   name: string
   operator: string
-  cover_url: string
-  starts_in: CityProps
-  ends_in: CityProps
-  itinerary: Array<{
-    place_itinerary: Array<{
-      section_number: number
-      is_access: boolean
-      place: {
-        name: string
-      }
-    }>
-  }>
+  coverUrl: string
+  itinerary: PlaceProps[]
   timetable: Array<{
     id: string
     direction: string
@@ -38,10 +25,7 @@ export interface BusRoutesState {
   busRoutes: BusRouteProps[]
   isLoading: boolean
 
-  search: (
-    originCityId: string | null,
-    destinyCityId: string | null,
-  ) => Promise<void>
+  searchBusRoutesByPlaces: (placesId: string[] | null) => Promise<void>
 
   clear: () => void
 }
@@ -51,7 +35,7 @@ export const useBusRoutesStore = create<BusRoutesState>((set, get) => {
     busRoutes: [],
     isLoading: true,
 
-    search: async (originCityId, destinyCityId) => {
+    searchBusRoutesByPlaces: async (placesId) => {
       set({ isLoading: true })
       const response = await fetch('/api/linhas/search', {
         method: 'POST',
@@ -59,8 +43,7 @@ export const useBusRoutesStore = create<BusRoutesState>((set, get) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          originCityId,
-          destinyCityId,
+          placesId,
         }),
       })
 

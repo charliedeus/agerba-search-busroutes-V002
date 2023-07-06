@@ -21,12 +21,6 @@ model BusRoute {
   created_at DateTime @default(now())
 
   PopularBusRoute PopularBusRoute[]
-  starts_in       City              @relation("StartsInCity", fields: [starts_in_id], references: [id])
-  starts_in_id    String
-  ends_in         City              @relation("EndsInCity", fields: [ends_in_id], references: [id])
-  ends_in_id      String
-  City            City?             @relation(fields: [city_id], references: [id])
-  city_id         String?
   itinerary       Itinerary[]
   timetable       Timetable[]
 
@@ -50,10 +44,6 @@ model City {
   cover_url           String?
   count_origin_views  Int     @default(0)
   count_destiny_views Int     @default(0)
-
-  starts_in BusRoute[] @relation("StartsInCity")
-  ends_in   BusRoute[] @relation("EndsInCity")
-  BusRoute  BusRoute[]
 
   @@map("cities")
 }
