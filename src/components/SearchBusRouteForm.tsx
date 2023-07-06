@@ -150,7 +150,9 @@ export const SearchBusRouteForm = forwardRef<
         selectedPlaces.map((place) => (
           <div key={place.id} className="flex flex-col gap-2">
             <div className="relative flex w-full flex-none items-center justify-between gap-2 laptop:mx-auto laptop:w-2/3 laptop:flex-row laptop:gap-4">
-              <span className="px-4">{place.name}</span>
+              <span className="h-full w-full flex-1 rounded-lg bg-zinc-100 p-4 shadow outline-none">
+                {place.name}
+              </span>
 
               <button
                 type="button"
