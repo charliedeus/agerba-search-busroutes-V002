@@ -216,25 +216,29 @@ export const SearchBusRouteForm = forwardRef<
               type="button"
               onClick={handleAddPlace}
               disabled={!selectedPlace}
-              className="rounded-lg bg-blue-800 p-4 hover:bg-blue-800 focus:bg-blue-800 disabled:bg-zinc-500 "
+              className="rounded-lg bg-blue-800 p-4 text-white hover:bg-blue-800 focus:bg-blue-800 disabled:bg-zinc-500 disabled:text-zinc-950"
             >
-              <Plus className="h-4 w-4 text-white" />
+              <Plus className="h-4 w-4" />
             </button>
           </div>
         </div>
 
-        {busRoutes.length > 0 && (
+        {isSearch && (
           <div className="flex grow flex-col gap-4 rounded-lg bg-zinc-100 px-2 py-4 shadow laptop:mx-auto laptop:w-2/3">
-            <h1 className="text-base font-semibold">
-              Resultado:{' '}
-              {busRoutes.length === 1
-                ? `${busRoutes.length} linha`
-                : `${busRoutes.length} linhas`}
-            </h1>
+            {!isSearch && (
+              <h1 className="text-base font-semibold">
+                Resultado:{' '}
+                {busRoutes.length === 1
+                  ? `${busRoutes.length} linha`
+                  : `${busRoutes.length} linhas`}
+              </h1>
+            )}
             <div className="relative h-32 grow">
               <ul className="absolute inset-0 space-y-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-zinc-400">
                 {isSearch && busRoutes.length === 0 ? (
-                  <h1>Não foram encontrados registros...</h1>
+                  <h1 className="text-center font-bold">
+                    Não foram encontrados registros...
+                  </h1>
                 ) : (
                   <>
                     {busRoutes.map((item, index) => (
@@ -257,15 +261,19 @@ export const SearchBusRouteForm = forwardRef<
         )}
 
         <div className="mt-auto flex flex-none items-center gap-1 laptop:mx-auto laptop:w-2/3">
-          <button className="flex flex-1 items-center justify-between gap-2 rounded-md bg-blue-900 px-4 py-3 font-semibold text-zinc-50 hover:bg-blue-950 focus:bg-blue-950">
+          <button
+            disabled={!selectedPlace}
+            className="flex flex-1 items-center justify-between gap-2 rounded-md bg-blue-900 px-4 py-3 font-semibold text-zinc-50 hover:bg-blue-950 focus:bg-blue-950 disabled:bg-zinc-500 disabled:text-zinc-950"
+          >
             Buscar
             <Search className="h-4 w-4" />
           </button>
 
           <button
             type="reset"
+            disabled={busRoutes.length === 0 && selectedPlace === null}
             onClick={handleClearForm}
-            className="h-full rounded-md bg-red-500 px-4 py-3 font-semibold text-zinc-50 hover:bg-red-600 focus:bg-red-600"
+            className="h-full rounded-md bg-red-500 px-4 py-3 font-semibold text-zinc-50 hover:bg-red-600 focus:bg-red-600 disabled:bg-zinc-500 disabled:text-zinc-950"
           >
             <X className="h-4 w-4" />
           </button>
