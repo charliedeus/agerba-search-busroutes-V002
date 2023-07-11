@@ -1,26 +1,23 @@
 'use client'
 
-import { Plus, Search, X } from 'lucide-react'
-import { useForm } from 'react-hook-form'
+import { useBusRoutesStore } from '@/store/searchedBusRoutesStore'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import { Plus, Search, X } from 'lucide-react'
 import {
   ChangeEvent,
+  KeyboardEvent,
   forwardRef,
   useMemo,
   useRef,
-  KeyboardEvent,
   useState,
 } from 'react'
-import {
-  BusRouteProps,
-  useBusRoutesStore,
-} from '@/store/searchedBusRoutesStore'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 // import { MostAttendedCities } from './MostAttendedCities'
-import Modal from './Modal'
-import { Combobox, Dialog, Transition } from '@headlessui/react'
 import { usePlacesStore } from '@/store/searchPlacesStore'
+import { Combobox, Transition } from '@headlessui/react'
 import { debounce } from 'lodash'
+import Link from 'next/link'
 
 interface PlaceProps {
   id: string
@@ -39,13 +36,8 @@ export const SearchBusRouteForm = forwardRef<
   HTMLFormElement,
   SearchBusRouteFormProps
 >(function SearchBusRouteForm(ref) {
-  const [modalIsOpen, setModalIsOpen] = useState(false)
-
-  const [isSearch, setIsSearch] = useState(false)
   const [selectedPlace, setSelectedPlace] = useState<PlaceProps | null>(null)
   const [selectedPlaces, setSelectedPlaces] = useState<PlaceProps[]>([])
-  const [selectedBusRoute, setSelectedBusRoute] =
-    useState<BusRouteProps | null>()
 
   const { handleSubmit, reset } = useForm<searchFormValidationData>({
     resolver: zodResolver(searchFormValidationSchema),
@@ -94,7 +86,6 @@ export const SearchBusRouteForm = forwardRef<
     reset()
     clear()
     clearBusRoutesList()
-    setIsSearch(false)
   }
 
   async function changeHandler(event: ChangeEvent<HTMLInputElement>) {
@@ -125,13 +116,12 @@ export const SearchBusRouteForm = forwardRef<
     }
 
     searchBusRoutesByPlaces(searchPlacesId)
-    setIsSearch(true)
   }
 
-  async function handleSelectedBusRoute(busRoute: BusRouteProps) {
-    setModalIsOpen(true)
-    setSelectedBusRoute(busRoute)
-  }
+  // async function handleSelectedBusRoute(busRoute: BusRouteProps) {
+  //   setModalIsOpen(true)
+  //   setSelectedBusRoute(busRoute)
+  // }
 
   async function handleEscapeKey(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key === 'Escape') {
@@ -139,10 +129,6 @@ export const SearchBusRouteForm = forwardRef<
       clear()
     }
   }
-
-  // useImperativeHandle(ref, () => ({
-  //   setSelectedPlace: (place: PlaceProps | null) => setSelectedPlace(place),
-  // }))
 
   return (
     <>
@@ -223,46 +209,37 @@ export const SearchBusRouteForm = forwardRef<
           </div>
         </div>
 
-        {isSearch && (
-          <div className="flex grow flex-col gap-4 rounded-lg bg-zinc-100 px-2 py-4 shadow laptop:mx-auto laptop:w-2/3">
-            {!isSearch && (
-              <h1 className="text-base font-semibold">
-                Resultado:{' '}
-                {busRoutes.length === 1
-                  ? `${busRoutes.length} linha`
-                  : `${busRoutes.length} linhas`}
-              </h1>
-            )}
-            <div className="relative h-32 grow">
-              <ul className="absolute inset-0 space-y-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-zinc-400">
-                {isSearch && busRoutes.length === 0 ? (
-                  <h1 className="text-center font-bold">
-                    Não foram encontrados registros...
-                  </h1>
-                ) : (
-                  <>
-                    {busRoutes.map((item, index) => (
-                      <li
-                        key={item.id}
-                        onClick={() => handleSelectedBusRoute(item)}
-                        className="flex cursor-pointer items-center gap-2 pr-4 text-sm hover:font-semibold"
-                      >
-                        <span className="w-6 self-start text-zinc-400">
-                          {index + 1}
-                        </span>
-                        <span className="flex-1 truncate">{item.name}</span>
-                      </li>
-                    ))}
-                  </>
-                )}
-              </ul>
+        <div className="flex grow flex-col gap-4 rounded-lg bg-zinc-100 px-2 py-4 shadow laptop:mx-auto laptop:w-2/3">
+          {busRoutes.length > 0 && (
+            <h1 className="text-base font-semibold">
+              Resultado:{' '}
+              {busRoutes.length === 1
+                ? `${busRoutes.length} linha`
+                : `${busRoutes.length} linhas`}
+            </h1>
+          )}
+          <div className="relative h-32 grow">
+            <div className="absolute inset-0 space-y-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-zinc-400">
+              {busRoutes.length > 0 &&
+                busRoutes.map((item, index) => (
+                  <Link
+                    href={`/linhas/${item.id}`}
+                    key={item.id}
+                    className="flex cursor-pointer items-center gap-2 pr-4 text-sm hover:font-semibold"
+                  >
+                    <span className="w-6 self-start text-zinc-400">
+                      {index + 1}
+                    </span>
+                    <span className="flex-1 truncate">{item.name}</span>
+                  </Link>
+                ))}
             </div>
           </div>
-        )}
+        </div>
 
         <div className="mt-auto flex flex-none items-center gap-1 laptop:mx-auto laptop:w-2/3">
           <button
-            disabled={!selectedPlace}
+            disabled={selectedPlace === null && selectedPlaces.length === 0}
             className="flex flex-1 items-center justify-between gap-2 rounded-md bg-blue-900 px-4 py-3 font-semibold text-zinc-50 hover:bg-blue-950 focus:bg-blue-950 disabled:bg-zinc-500 disabled:text-zinc-950"
           >
             Buscar
@@ -271,37 +248,12 @@ export const SearchBusRouteForm = forwardRef<
 
           <button
             type="reset"
-            disabled={busRoutes.length === 0 && selectedPlace === null}
             onClick={handleClearForm}
             className="h-full rounded-md bg-red-500 px-4 py-3 font-semibold text-zinc-50 hover:bg-red-600 focus:bg-red-600 disabled:bg-zinc-500 disabled:text-zinc-950"
           >
             <X className="h-4 w-4" />
           </button>
         </div>
-        <Transition
-          show={true}
-          enter="transition duration-100 ease-out"
-          enterFrom="transform scale-95 opacity-0"
-          enterTo="transform scale-100 opacity-100"
-          leave="transition duration-75 ease-out"
-          leaveFrom="transform scale-100 opacity-100"
-          leaveTo="transform scale-95 opacity-0"
-        >
-          <Dialog
-            open={modalIsOpen}
-            className="relative z-40"
-            onClose={() => setModalIsOpen(false)}
-          >
-            <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-
-            {selectedBusRoute && (
-              <Modal
-                busRoute={selectedBusRoute}
-                closeModal={() => setModalIsOpen(false)}
-              />
-            )}
-          </Dialog>
-        </Transition>
       </form>
     </>
   )

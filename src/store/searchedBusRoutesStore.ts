@@ -22,19 +22,32 @@ export interface BusRouteProps {
 }
 
 export interface BusRoutesState {
+  busRoute: BusRouteProps | null
   busRoutes: BusRouteProps[]
   isLoading: boolean
 
+  searchBusRouteById: (busRouteId: string) => Promise<void>
   searchBusRoutesByPlaces: (placesId: string[] | null) => Promise<void>
-
   clear: () => void
 }
 
-export const useBusRoutesStore = create<BusRoutesState>((set, get) => {
+export const useBusRoutesStore = create<BusRoutesState>((set) => {
   return {
+    busRoute: null,
     busRoutes: [],
     isLoading: true,
 
+    searchBusRouteById: async (busRouteId) => {
+      set({ isLoading: true })
+
+      const response = await fetch(`/api/linhas/search_by_id/${busRouteId}`)
+      const result = await response.json()
+
+      set({
+        busRoute: result,
+        isLoading: false,
+      })
+    },
     searchBusRoutesByPlaces: async (placesId) => {
       set({ isLoading: true })
       const response = await fetch('/api/linhas/search', {
@@ -57,7 +70,9 @@ export const useBusRoutesStore = create<BusRoutesState>((set, get) => {
 
     clear: () => {
       set({
+        busRoute: null,
         busRoutes: [],
+        isLoading: false,
       })
     },
   }
